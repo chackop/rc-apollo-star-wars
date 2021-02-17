@@ -6,15 +6,9 @@ import reportWebVitals from "./reportWebVitals";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 
 const client = new ApolloClient({
-  uri: "https://graphql.org/swapi-graphql",
+  uri: "https://swapi-graphql.netlify.app/.netlify/functions/index",
+  // uri: "https://graphql.org/swapi-graphql",
   cache: new InMemoryCache(),
-  headers: {
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "DELETE, POST, GET, OPTIONS",
-    "Access-Control-Allow-Headers":
-      "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With",
-  },
-  credentials: "omit",
 });
 
 ReactDOM.render(

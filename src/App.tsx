@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 
-import { useQuery, gql } from "@apollo/client";
+import { useQuery, gql, DocumentNode } from "@apollo/client";
+import SelectComponents from "./components/SelectComponents";
+import { Container } from "@material-ui/core";
 
 const ALL_STARSHIPS = gql`
   {
@@ -9,6 +11,20 @@ const ALL_STARSHIPS = gql`
       edges {
         node {
           name
+          hyperdriveRating
+        }
+      }
+    }
+  }
+`;
+
+const ALL_PEOPLE = gql`
+  {
+    allPeople {
+      edges {
+        node {
+          name
+          height
         }
       }
     }
@@ -16,20 +32,51 @@ const ALL_STARSHIPS = gql`
 `;
 
 function App() {
-  const { loading, error, data } = useQuery(ALL_STARSHIPS);
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error Loading {error}</p>;
+  const [selection, setSelection] = useState("");
+
+  const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+    setSelection(event.target.value as string);
+  };
+
+  let RES_QUERY: DocumentNode = gql`
+    {
+      allPeople {
+        edges {
+          node {
+            name
+            height
+          }
+        }
+      }
+    }
+  `;
+  if (selection === "Starship") {
+    RES_QUERY = ALL_STARSHIPS;
+  } else if (selection === "People") {
+    RES_QUERY = ALL_PEOPLE;
+  }
+
+  const { loading, error, data } = useQuery(RES_QUERY);
+
+  if (loading) return <p>Loading...{selection}</p>;
+  if (error)
+    return (
+      <p>
+        Error Loading {selection}- {error}
+      </p>
+    );
 
   return (
-    <>
-      <h2>Star wars Spaceship</h2>
+    <Container>
+      <h2>Star wars TopTrumps</h2>
+
+      <SelectComponents
+        resourceSelect={selection}
+        handleChange={handleChange}
+      />
 
       {console.log("data", data)}
-      {/* {data &&
-        data.allStarships.edges.map(({ node }: any, idx: number) => (
-          <p key={"allStarships" + node.name + idx}>{node.name}</p>
-        ))} */}
-    </>
+    </Container>
   );
 }
 
