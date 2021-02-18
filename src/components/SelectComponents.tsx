@@ -48,9 +48,9 @@ const SelectComponents: React.FC<SelectComponentsProps> = ({
           label="Select Resources"
           className={classes.selectEmpty}
         >
-          <MenuItem value="">
+          {/* <MenuItem value="">
             <em>None</em>
-          </MenuItem>
+          </MenuItem> */}
           <MenuItem value="Starship">Starship</MenuItem>
           <MenuItem value="People">People</MenuItem>
         </Select>
