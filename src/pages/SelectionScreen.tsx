@@ -4,11 +4,11 @@ import { Link } from "react-router-dom";
 
 const SelectionScreen = () => {
   return (
-    <Grid>
-      <Button variant="contained">
+    <Grid container justify="space-evenly">
+      <Button variant="contained" color="secondary">
         <Link to="/ship">Starpship</Link>
       </Button>
-      <Button variant="contained">
+      <Button variant="contained" color="secondary">
         <Link to="/people">People</Link>
       </Button>
     </Grid>

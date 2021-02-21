@@ -1,6 +1,7 @@
-import { Card, CardContent, Grid, Typography } from "@material-ui/core";
+import { Button, Card, CardContent, Grid, Typography } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import { useQuery, gql } from "@apollo/client";
+import { Link } from "react-router-dom";
 
 const ALL_STARSHIPS = gql`
   {
@@ -26,17 +27,13 @@ const ShipScreen = () => {
       const shipOne =
         data["allStarships"] &&
         data["allStarships"]["edges"][
-          Math.floor(
-            Math.random() * data["allStarships"]["edges"]["edges"].length
-          )
+          Math.floor(Math.random() * data["allStarships"]["edges"].length)
         ];
 
       const shipTwo =
         data["allStarships"] &&
         data["allStarships"]["edges"][
-          Math.floor(
-            Math.random() * data["allStarships"]["edges"]["edges"].length
-          )
+          Math.floor(Math.random() * data["allStarships"]["edges"].length)
         ];
 
       setshipOneStat({
@@ -55,39 +52,56 @@ const ShipScreen = () => {
   if (error) return <p>Error Loading Ship Data- {error}</p>;
 
   return (
-    <Grid container>
-      <Card title="Ship One">
-        <CardContent>
-          <Typography color="textSecondary" gutterBottom>
-            Hyper Drive Rating
-          </Typography>
-          <Typography variant="h5" component="h2">
-            {shipOneStat.name} - {shipOneStat.value}
-          </Typography>
-          <Typography variant="body2" component="p">
-            {shipOneStat.value > shipTwoStat.value
-              ? "Ship One Wins"
-              : "Ship One Lost"}
-          </Typography>
-        </CardContent>
-      </Card>
+    <>
+      <Grid container justify="space-evenly">
+        <Card title="Ship One">
+          <CardContent>
+            <Typography color="textSecondary" gutterBottom>
+              Ship One
+            </Typography>
+            <Typography variant="h5" component="h2" gutterBottom>
+              {shipOneStat.name}
+            </Typography>
+            <Typography variant="body2" component="p">
+              Hyper Drive Rating- {shipOneStat.value}
+            </Typography>
+          </CardContent>
+        </Card>
 
-      <Card title="Ship Two">
-        <CardContent>
-          <Typography color="textSecondary" gutterBottom>
-            Hyper Drive Rating
-          </Typography>
-          <Typography variant="h5" component="h2">
-            {shipTwoStat.name} - {shipTwoStat.value}
-          </Typography>
-          <Typography variant="body2" component="p">
-            {shipOneStat.value < shipTwoStat.value
-              ? "Ship Two Wins"
-              : "Ship Two Lost"}
-          </Typography>
-        </CardContent>
-      </Card>
-    </Grid>
+        <Card title="Ship Two">
+          <CardContent>
+            <Typography color="textSecondary" gutterBottom>
+              Ship Two
+            </Typography>
+            <Typography variant="h5" component="h2" gutterBottom>
+              {shipTwoStat.name}
+            </Typography>
+            <Typography variant="body2" component="p">
+              Hyper Drive Rating- {shipTwoStat.value}
+            </Typography>
+          </CardContent>
+        </Card>
+      </Grid>
+
+      <Typography variant="h4" component="h2" color="secondary" gutterBottom>
+        {shipOneStat.value > shipTwoStat.value
+          ? "Ship One Wins"
+          : "Ship Two Wins"}
+      </Typography>
+
+      <Grid container justify="space-evenly" spacing={1}>
+        <Button variant="contained" color="secondary">
+          <Link to="/">Back to Selection</Link>
+        </Button>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => window.location.reload()}
+        >
+          Reload Ships
+        </Button>
+      </Grid>
+    </>
   );
 };
 
