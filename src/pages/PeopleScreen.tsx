@@ -1,9 +1,9 @@
-import { Button, Card, CardContent, Grid, Typography } from "@material-ui/core";
-import React, { useEffect, useState } from "react";
+import { Card, CardContent, Grid, Typography } from "@material-ui/core";
+import { useEffect, useState } from "react";
 import { useQuery, gql } from "@apollo/client";
-import { Link } from "react-router-dom";
+import Footer from "../components/Footer";
 
-const ALL_PEOPLES = gql`
+export const ALL_PEOPLES = gql`
   {
     allPeople {
       edges {
@@ -55,6 +55,10 @@ const PeopleScreen = () => {
 
   return (
     <>
+      <Typography variant="h4" component="h2" gutterBottom>
+        People
+      </Typography>
+
       <Grid container justify="space-evenly">
         <Card title="People One">
           <CardContent>
@@ -91,18 +95,7 @@ const PeopleScreen = () => {
           : "Person Two Wins"}
       </Typography>
 
-      <Grid container justify="space-evenly" spacing={1}>
-        <Button variant="contained" color="secondary">
-          <Link to="/">Back to Selection</Link>
-        </Button>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => window.location.reload()}
-        >
-          Reload People
-        </Button>
-      </Grid>
+      <Footer type="People" />
     </>
   );
 };

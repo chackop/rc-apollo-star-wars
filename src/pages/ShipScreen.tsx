@@ -1,9 +1,9 @@
-import { Button, Card, CardContent, Grid, Typography } from "@material-ui/core";
+import { Card, CardContent, Grid, Typography } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import { useQuery, gql } from "@apollo/client";
-import { Link } from "react-router-dom";
+import Footer from "../components/Footer";
 
-const ALL_STARSHIPS = gql`
+export const ALL_STARSHIPS = gql`
   {
     allStarships {
       edges {
@@ -53,6 +53,10 @@ const ShipScreen = () => {
 
   return (
     <>
+      <Typography variant="h4" component="h2" gutterBottom>
+        Ships
+      </Typography>
+
       <Grid container justify="space-evenly">
         <Card title="Ship One">
           <CardContent>
@@ -89,18 +93,7 @@ const ShipScreen = () => {
           : "Ship Two Wins"}
       </Typography>
 
-      <Grid container justify="space-evenly" spacing={1}>
-        <Button variant="contained" color="secondary">
-          <Link to="/">Back to Selection</Link>
-        </Button>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => window.location.reload()}
-        >
-          Reload Ships
-        </Button>
-      </Grid>
+      <Footer type="Ships" />
     </>
   );
 };
