@@ -1,3 +1,21 @@
+# Star Wars Top Trump
+
+This project allows you to select to play with people or ships.
+After the selection, GraphQL queries the specific resources to show couple of "cards".
+The card with the highest attribute (height or hyperdrive rating) is declared the winner
+
+The project has been done with the following tech stack:
+
+- Typescript, React, Function components with useeffect and usestate hooks,
+- GraphQL with Apollo that queries data for people and ships,
+- Client side routing with react router dom to navigate between between the 3 page components.
+- Basic Unit testing of all components using react testing-library
+- Styled Components for wrapper and theme switching,
+- Material UI components for style enhancements,
+
+Please see the operation in below GIF:
+![StarTR](StarTR.gif)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

@@ -23,8 +23,6 @@ const PeopleScreen = () => {
   const [PeopleTwoStat, setPeopleTwoStat] = useState({ name: "", value: 0 });
 
   useEffect(() => {
-    console.log("in useffect", data);
-
     if (data) {
       const PeopleOne =
         data["allPeople"] &&
