@@ -4,9 +4,10 @@ import { Link } from "react-router-dom";
 
 interface FooterProps {
   type: "Ships" | "People";
+  handleReload: () => void;
 }
 
-const Footer: React.FC<FooterProps> = ({ type }) => {
+const Footer: React.FC<FooterProps> = ({ type, handleReload }) => {
   return (
     <Grid container justify="space-evenly" spacing={1}>
       <Button variant="contained" color="secondary">
@@ -15,7 +16,7 @@ const Footer: React.FC<FooterProps> = ({ type }) => {
       <Button
         variant="contained"
         color="primary"
-        onClick={() => window.location.reload()}
+        onClick={() => handleReload()}
       >
         Reload {type}
       </Button>

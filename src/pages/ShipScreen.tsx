@@ -21,6 +21,7 @@ const ShipScreen = () => {
 
   const [shipOneStat, setshipOneStat] = useState({ name: "", value: 0 });
   const [shipTwoStat, setshipTwoStat] = useState({ name: "", value: 0 });
+  const [reload, setReload] = useState(false);
 
   useEffect(() => {
     if (data) {
@@ -46,7 +47,7 @@ const ShipScreen = () => {
         value: shipTwo && shipTwo["node"]["hyperdriveRating"],
       });
     }
-  }, [data]);
+  }, [data, reload]);
 
   if (loading) return <p>Loading...Star Ship Data</p>;
   if (error) return <p>Error Loading Ship Data- {error}</p>;
@@ -93,7 +94,10 @@ const ShipScreen = () => {
           : "Ship Two Wins"}
       </Typography>
 
-      <Footer type="Ships" />
+      <Footer
+        type="Ships"
+        handleReload={() => setReload((prevReload) => !prevReload)}
+      />
     </>
   );
 };

@@ -21,6 +21,7 @@ const PeopleScreen = () => {
 
   const [PeopleOneStat, setPeopleOneStat] = useState({ name: "", value: 0 });
   const [PeopleTwoStat, setPeopleTwoStat] = useState({ name: "", value: 0 });
+  const [reload, setReload] = useState(false);
 
   useEffect(() => {
     if (data) {
@@ -46,7 +47,7 @@ const PeopleScreen = () => {
         value: PeopleTwo && PeopleTwo["node"]["height"],
       });
     }
-  }, [data]);
+  }, [data, reload]);
 
   if (loading) return <p>Loading...Star People Data</p>;
   if (error) return <p>Error Loading People Data- {error}</p>;
@@ -93,7 +94,10 @@ const PeopleScreen = () => {
           : "Person Two Wins"}
       </Typography>
 
-      <Footer type="People" />
+      <Footer
+        type="People"
+        handleReload={() => setReload((prevReload) => !prevReload)}
+      />
     </>
   );
 };
