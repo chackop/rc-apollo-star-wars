@@ -1,7 +1,8 @@
 import { Card, CardContent, Grid, Typography } from "@material-ui/core";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useQuery, gql } from "@apollo/client";
 import Footer from "../components/Footer";
+import { RowItem } from "./LogResults";
 
 export const ALL_STARSHIPS = gql`
   {
@@ -16,7 +17,11 @@ export const ALL_STARSHIPS = gql`
   }
 `;
 
-const ShipScreen = () => {
+interface ShipScreenProps {
+  logHandler: (params: RowItem) => void;
+}
+
+const ShipScreen: React.FC<ShipScreenProps> = ({ logHandler }) => {
   const { loading, error, data } = useQuery(ALL_STARSHIPS);
 
   const [shipOneStat, setshipOneStat] = useState({ name: "", value: 0 });
@@ -46,6 +51,16 @@ const ShipScreen = () => {
         name: shipTwo && shipTwo["node"]["name"],
         value: shipTwo && shipTwo["node"]["hyperdriveRating"],
       });
+
+      // logHandler({
+      //   gameItem: `#-${new Date()}`,
+      //   playerOneStat: `${shipOneStat.name}-${shipOneStat.value}`,
+      //   playerTwoStat: `${shipTwoStat.name}-${shipTwoStat.value}`,
+      //   winnerDetails:
+      //     shipOneStat.value > shipTwoStat.value
+      //       ? "Ship One is Winner"
+      //       : "Ship Two is Winner",
+      // });
     }
   }, [data, reload]);
 

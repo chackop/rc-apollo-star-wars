@@ -1,7 +1,8 @@
 import { Card, CardContent, Grid, Typography } from "@material-ui/core";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useQuery, gql } from "@apollo/client";
 import Footer from "../components/Footer";
+import { RowItem } from "./LogResults";
 
 export const ALL_PEOPLES = gql`
   {
@@ -16,7 +17,11 @@ export const ALL_PEOPLES = gql`
   }
 `;
 
-const PeopleScreen = () => {
+interface PeopleScreenProps {
+  logHandler: (params: RowItem) => void;
+}
+
+const PeopleScreen: React.FC<PeopleScreenProps> = ({ logHandler }) => {
   const { loading, error, data } = useQuery(ALL_PEOPLES);
 
   const [PeopleOneStat, setPeopleOneStat] = useState({ name: "", value: 0 });
@@ -46,6 +51,16 @@ const PeopleScreen = () => {
         name: PeopleTwo && PeopleTwo["node"]["name"],
         value: PeopleTwo && PeopleTwo["node"]["height"],
       });
+
+      // logHandler({
+      //   gameItem: `#-${new Date()}`,
+      //   playerOneStat: `${PeopleOne.name}-${PeopleOne.value}`,
+      //   playerTwoStat: `${PeopleTwo.name}-${PeopleTwo.value}`,
+      //   winnerDetails:
+      //     PeopleOne.value > PeopleTwo.value
+      //       ? "Person One is Winner"
+      //       : "Person Two is Winner",
+      // });
     }
   }, [data, reload]);
 
