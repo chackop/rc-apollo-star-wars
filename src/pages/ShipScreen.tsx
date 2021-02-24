@@ -52,17 +52,20 @@ const ShipScreen: React.FC<ShipScreenProps> = ({ logHandler }) => {
         value: shipTwo && shipTwo["node"]["hyperdriveRating"],
       });
 
-      // logHandler({
-      //   gameItem: `#-${new Date()}`,
-      //   playerOneStat: `${shipOneStat.name}-${shipOneStat.value}`,
-      //   playerTwoStat: `${shipTwoStat.name}-${shipTwoStat.value}`,
-      //   winnerDetails:
-      //     shipOneStat.value > shipTwoStat.value
-      //       ? "Ship One is Winner"
-      //       : "Ship Two is Winner",
-      // });
+      const dte = new Date();
+
+      logHandler({
+        gameItem: `#-${dte.toISOString()}`,
+        playerOneStat: `${shipOne["node"]["name"]}-${shipOne["node"]["hyperdriveRating"]}`,
+        playerTwoStat: `${shipTwo["node"]["name"]}-${shipTwo["node"]["hyperdriveRating"]}`,
+        winnerDetails:
+          shipOne["node"]["hyperdriveRating"] >
+          shipTwo["node"]["hyperdriveRating"]
+            ? "Ship One is Winner"
+            : "Ship Two is Winner",
+      });
     }
-  }, [data, reload]);
+  }, [data, logHandler, reload]);
 
   if (loading) return <p>Loading...Star Ship Data</p>;
   if (error) return <p>Error Loading Ship Data- {error}</p>;

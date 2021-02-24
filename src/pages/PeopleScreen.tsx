@@ -52,21 +52,22 @@ const PeopleScreen: React.FC<PeopleScreenProps> = ({ logHandler }) => {
         value: PeopleTwo && PeopleTwo["node"]["height"],
       });
 
-      // logHandler({
-      //   gameItem: `#-${new Date()}`,
-      //   playerOneStat: `${PeopleOne.name}-${PeopleOne.value}`,
-      //   playerTwoStat: `${PeopleTwo.name}-${PeopleTwo.value}`,
-      //   winnerDetails:
-      //     PeopleOne.value > PeopleTwo.value
-      //       ? "Person One is Winner"
-      //       : "Person Two is Winner",
-      // });
+      const dte = new Date();
+
+      logHandler({
+        gameItem: `#-${dte.toISOString()}`,
+        playerOneStat: `${PeopleOne["node"]["name"]}-${PeopleOne["node"]["height"]}`,
+        playerTwoStat: `${PeopleTwo["node"]["name"]}-${PeopleTwo["node"]["height"]}`,
+        winnerDetails:
+          PeopleOne["node"]["height"] > PeopleTwo["node"]["height"]
+            ? "Person One is Winner"
+            : "Person Two is Winner",
+      });
     }
-  }, [data, reload]);
+  }, [data, logHandler, reload]);
 
   if (loading) return <p>Loading...Star People Data</p>;
   if (error) return <p>Error Loading People Data- {error}</p>;
-
   return (
     <>
       <Typography variant="h4" component="h2" gutterBottom>

@@ -23,7 +23,9 @@ function App() {
 
   const handleLogging = useCallback(
     (rowObj: RowItem) => {
-      let newArr = [...dataRows, rowObj];
+      // let newArr = [...dataRows, rowObj];
+      let newArr = dataRows;
+      newArr.push(rowObj);
       setdataRows(newArr);
     },
     [dataRows]

@@ -29,7 +29,6 @@ export interface LogResultsProps {
 
 const LogResults: React.FC<LogResultsProps> = ({ dataRows }) => {
   const classes = useStyles();
-
   return (
     <>
       {dataRows ? (
@@ -46,7 +45,14 @@ const LogResults: React.FC<LogResultsProps> = ({ dataRows }) => {
             <TableBody>
               {dataRows &&
                 dataRows.map((row: RowItem) => (
-                  <TableRow key={row.gameItem}>
+                  <TableRow
+                    key={
+                      row.gameItem +
+                      row.playerOneStat +
+                      row.playerTwoStat +
+                      row.winnerDetails
+                    }
+                  >
                     <TableCell component="th" scope="row">
                       {row.gameItem}
                     </TableCell>
