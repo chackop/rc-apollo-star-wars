@@ -16,6 +16,9 @@ The project has been done with the following tech stack:
 Please see the operation in below GIF:
 ![StarTR](StarTR.gif)
 
+Also added logs of each play which can be accessed via the selection screen as follows:
+![Logs](Logs.png)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
